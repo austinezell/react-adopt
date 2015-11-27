@@ -1,6 +1,6 @@
 'use strict';
 
-var express = require('express').Router();
+var router = require('express').Router();
 var passport = require('passport')
 let auth = require('../config/parseJWT')
 var User = require('../models/user.js')

@@ -4,12 +4,6 @@ let jwtAuth = {}
 var jwt = require('express-jwt');
 let atob = require('atob');
 
-arr.forEach(callbackFunction())
-
-function callbackFunction(item) {
-  console.log(item)
-}
-
 jwtAuth.getUserId = (authHeader) =>{
   let jwt = authHeader.replace(/Bearer /, "");
   let stringPayload = atob(jwt.split('.')[1]);
