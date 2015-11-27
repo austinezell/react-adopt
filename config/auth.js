@@ -1,7 +1,7 @@
 'use strict';
 
 let jwtAuth = {}
-var jwt = require('express-jwt');
+let jwt = require('express-jwt');
 let atob = require('atob');
 
 jwtAuth.getUserId = (authHeader) =>{

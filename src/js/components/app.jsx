@@ -1,13 +1,18 @@
-'use strict';
-import React from 'react';
+'use strict'
+import React from 'react'
+import {render} from 'react-dom'
+import NavBar from './navbar.jsx'
+import {Router, Route, Link} from 'react-router';
 
-
-export default React.createClass({
+const App = React.createClass({
   render () {
     return (
       <div>
-        test 12
+        <NavBar/>
+        {this.props.children}
       </div>
     )
   }
 })
+
+export default App;

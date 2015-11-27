@@ -2,7 +2,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default React.createClass({
+const Register = React.createClass({
   render () {
     return (
       <div className='col-md-6 login'>
@@ -20,13 +20,19 @@ export default React.createClass({
             <input type='password' placeholder='Password' ref='password' id='password'/>
           </div>
           <div className='form-group'>
+            <label htmlFor='confimr'>Confirm Password</label><br/>
+            <input type='password' placeholder='Password' ref='password' id='password'/>
+          </div>
+          <div className='form-group'>
             <button type='submit' className='btn-primary'>Login</button>
           </div>
         </form>
         <div>
-          No account? Register <Link to='register'>here</Link>
+          Already have an account? Click <Link to='register'>here to login</Link>
         </div>
       </div>
     )
   }
 })
+
+export default Register

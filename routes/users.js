@@ -2,10 +2,10 @@
 
 var router = require('express').Router();
 var passport = require('passport')
-let auth = require('../config/parseJWT')
+let jwtAuth = require('../config/auth')
 var User = require('../models/user.js')
 
-router.post('/register', function(req, res, next){
+router.post('/register', (req, res)=>{
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
@@ -22,7 +22,7 @@ router.post('/register', function(req, res, next){
   });
 });
 
-router.post('/login', function(req, res, next){
+router.post('/login', (req, res)=>{
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
@@ -37,5 +37,13 @@ router.post('/login', function(req, res, next){
     }
   })(req, res, next);
 });
+
+router.get('/me', (req, res) =>{
+  const userId = jwtAuth.getUserId(req.headers.authorization);
+
+  User.findById(userId, (err, user)=>{
+    err ? res.status(499).send(err) : res.send(user);
+  })
+})
 
 module.exports = router;

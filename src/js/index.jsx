@@ -1,14 +1,19 @@
 import {Router, Route, Link} from 'react-router';
-
 import Login from './components/login.jsx';
-import
+import Register from './components/register.jsx';
 
 
-export default = React.createClass({
+render((
   <Router>
-    <Route path='login' compononent={Login}/>
-    <Route path='users' compononent={Users}/>
-    <Route path='user/:username' compononent={User}/>
-
+    <Route path='/' component ={App}>
+      <Route path='login' compononent={Login}/>
+      <Route path='register' compononent={Register}/>
+      <Route path='users' compononent={Users}>
+        <Route path='users/:username' component={User}/>
+      </Route>
+      <Route path='pets' components={Pets}>
+        <Route path='pets/:petname' component={Pet}/>
+      </Route>
+    </Route>
   </Router>
-})
+), document.body);
