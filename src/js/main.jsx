@@ -17,13 +17,15 @@ render((
     <Route path='/' component={App}>
       <Route path='login' component={Login}/>
       <Route path='register' component={Register}/>
-      <Route path='users' component={Users}>
-        <Route path='users/:username' component={User}/>
-      </Route>
-      <Route path='pets' component={Pets}>
-        <Route path='pets/:petname' component={Pet}/>
-      </Route>
 
     </Route>
   </Router>
 ), document.getElementById('react-node'));
+
+
+// <Route path='users' component={Users}>
+//   <Route path='users/:username' component={User}/>
+// </Route>
+// <Route path='pets' component={Pets}>
+//   <Route path='pets/:petname' component={Pet}/>
+// </Route>

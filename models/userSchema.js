@@ -1,13 +1,16 @@
 'use strict'
 
-var mongoose = require('mongoose');
+var Mongoose = require('mongoose');
 var crypto = require('crypto')
 var jwt = require('jsonwebtoken');
 
-var UserSchema = new mongoose.Schema({
-  username: {type: String, lowercase: true, unique: true},
+var UserSchema = new Mongoose.Schema({
+  username: {type: String, lowercase: true, unique: true, required: true},
+  email: {type: String, unique: true, required: true},
   hash: String,
-  salt: String
+  salt: String,
+  pets: [{type: Mongoose.Schema.ObjectId, ref: 'Pet'}],
+  dateJoined: {type: Date, default: new Date()}
 })
 
 UserSchema.methods.setPassword = function(password){
@@ -35,4 +38,4 @@ UserSchema.methods.generateJWT = function() {
   }, (process.env.SECRET || "secret"));
 };
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = Mongoose.model('User', UserSchema)

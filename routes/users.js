@@ -3,9 +3,10 @@
 var router = require('express').Router();
 var passport = require('passport')
 let jwtAuth = require('../config/auth')
-var User = require('../models/user.js')
+var User = require('../models/userSchema.js')
 
-router.post('/register', (req, res)=>{
+router.post('/register', (req, res, next)=>{
+  console.log(req.body);
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
@@ -13,12 +14,12 @@ router.post('/register', (req, res)=>{
   var user = new User();
 
   user.username = req.body.username;
-
-  user.setPassword(req.body.password)
+  user.email = req.body.username;
+  user.setPassword(req.body.password);
 
   user.save(function (err){
-    if(err){ return next(err); }
-    return res.json({token: user.generateJWT()})
+    if(err) return res.send(err);
+    return res.send(user.generateJWT())
   });
 });
 
@@ -26,8 +27,7 @@ router.post('/login', (req, res)=>{
   if(!req.body.username || !req.body.password){
     return res.status(400).json({message: 'Please fill out all fields'});
   }
-
-  passport.authenticate('local', function(err, user, info){
+  passport.authenticate('local', function(err, user, next){
     if(err){ return next(err); }
 
     if(user){
