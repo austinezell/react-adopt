@@ -1,6 +1,2 @@
-# passportTemplate
-simple MEAN template for passport utilizing jwt
-
-based majorly off of https://thinkster.io/mean-stack-tutorial#adding-authentication-via-passport
-
-use `npm run setup`
+# react-adopt
+fullstack adoption adoption agency to not only practice the react-flux programming flow.
