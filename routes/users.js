@@ -1,45 +1,48 @@
 'use strict';
 
 var router = require('express').Router();
-var passport = require('passport')
-let jwtAuth = require('../config/auth')
-var User = require('../models/userSchema.js')
+var passport = require('passport');
+let jwtAuth = require('../config/auth');
+var User = require('../models/userSchema.js');
 
 router.post('/register', (req, res, next)=>{
-  console.log(req.body);
-  if(!req.body.username || !req.body.password){
-    return res.status(400).json({message: 'Please fill out all fields'});
+  if(!req.body.username || !req.body.email || !req.body.password){
+    return res.status(401).json({message: 'Please fill out all fields'});
   }
 
-  var user = new User();
+  let user = new User();
 
   user.username = req.body.username;
   user.email = req.body.username;
   user.setPassword(req.body.password);
 
-  user.save(function (err){
-    if(err) return res.send(err);
-    return res.send(user.generateJWT())
+  user.save(function (err, user){
+    if(err) return res.status(499).send(err);
+
+    res.cookie('jwtuser', user.generateJWT());
+    res.end();
   });
 });
 
 router.post('/login', (req, res)=>{
   if(!req.body.username || !req.body.password){
-    return res.status(400).json({message: 'Please fill out all fields'});
+    return res.status(401).json({message: 'Please fill out all fields'});
   }
-  passport.authenticate('local', function(err, user, next){
-    if(err){ return next(err); }
+  User.findOne(req.username, (err, user)=>{
+    if (err) return res.status(499).send(err);
 
-    if(user){
-      return res.json({token: user.generateJWT()});
-    } else {
-      return res.status(401).json(info);
+    if (!user.validPassword(req.body.password) || !user){
+      return res.status(401).send('Invalid login credentials');
     }
-  })(req, res, next);
+
+    res.cookie('jwtuser', user.generateJWT(), { expires: new Date(Date.now() + 900000)});
+    res.end();
+  })
+
 });
 
 router.get('/me', (req, res) =>{
-  const userId = jwtAuth.getUserId(req.headers.authorization);
+  const userId = jwtAuth.getUserId(req.cookies.jwtuser);
 
   User.findById(userId, (err, user)=>{
     err ? res.status(499).send(err) : res.send(user);

@@ -1,12 +1,10 @@
 import $ from 'jquery';
-import AppDispatcher from '../AppDispatcher.js';
+import UserDispatcher from '../dispatchers/userDispatcher.js';
 import Actions from './actionTypes';
 
-const ACTIONS = Actions.USER
-
 const errorHandler = (err) => {
-  AppDispatcher.dispatch({
-    actionType: ACTIONS.ERROR,
+  UserDispatcher.dispatch({
+    actionType: Actions.USER.ERROR,
     err
   })
 }
@@ -15,9 +13,8 @@ export default {
   register (user) {
     $.post('/users/register', user)
     .success(function(user){
-      console.log(user);
-      AppDispatcher.dispatch({
-        actionType: ACTIONS.REGISTER,
+      UserDispatcher.dispatch({
+        actionType: Actions.USER.REGISTER,
         user
       })
     })
@@ -26,15 +23,15 @@ export default {
     })
   },
   login (user) {
-    $.get('/users/login')
-    .success(function(user){
-      AppDispatcher.dispatch({
-        actionType: ACTIONS.LOGIN,
+    $.post('/users/login', user)
+    .success(function(data){
+      UserDispatcher.dispatch({
+        actionType: Actions.USER.LOGIN,
         user
       })
-      .error(function(err){
-        errorHandler(err)
-      })
+    })
+    .error(function(err){
+      errorHandler(err)
     })
   }
 }

@@ -1,17 +1,16 @@
 'use strict';
 
 let jwtAuth = {}
-let jwt = require('express-jwt');
 let atob = require('atob');
+let jwt = require('express-jwt-cookie')
 
-jwtAuth.getUserId = (authHeader) =>{
-  let jwt = authHeader.replace(/Bearer /, "");
+jwtAuth.getUserId = (jwt) =>{
   let stringPayload = atob(jwt.split('.')[1]);
   let objectPayload =JSON.parse(stringPayload)
   let userId = objectPayload._id;
   return userId;
 }
 
-jwtAuth.middleware = jwt({secret: (process.env.SECRET || "secret"), userProperty: 'payload'});
+jwtAuth.middleware = jwt({secret: process.env.SECRET || 'secret'})
 
 module.exports = jwtAuth;

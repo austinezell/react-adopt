@@ -1,19 +1,24 @@
 'use strict';
 import React from 'react';
 import {Link} from 'react-router';
+import UserActions from '../actions/userActions.js';
 
 export default React.createClass({
+  login (event) {
+    event.preventDefault()
+    let user = {
+      username: this.refs.username.value,
+      password: this.refs.password.value
+    }
+    UserActions.login(user);
+  },
   render () {
     return (
-      <div className='col-md-6 login'>
-        <form id='login'>
+      <div className='col-md-offset-3 col-md-6 login'>
+        <form onSubmit={this.login} id='login'>
           <div className='form-group'>
             <label htmlFor='name'>Name</label><br/>
-            <input type='text' placeholder='Name' ref='name' id='name'/>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='email'>Email</label><br/>
-            <input type='text' placeholder='Email' ref='email' id='email'/>
+            <input type='text' placeholder='Name' ref='username' id='name'/>
           </div>
           <div className='form-group'>
             <label htmlFor='password'>Password</label><br/>

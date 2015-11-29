@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
 import {Link} from 'react-router';
-import UserActions from '../actions/userActions.js'
+import UserActions from '../actions/userActions.js';
+import { createHistory, useBasename } from 'history';
 
 const Register = React.createClass({
   register (event) {
@@ -11,7 +12,6 @@ const Register = React.createClass({
       email: this.refs.email.value,
       password: this.refs.password.value
     }
-    console.log(user.password, this.refs.confirm.value);
     if (user.password !== this.refs.confirm.value) alert('Passwords Do Not Match!')
     else UserActions.register(user);
   },
