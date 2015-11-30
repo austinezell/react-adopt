@@ -33,5 +33,14 @@ export default {
     .error(function(err){
       errorHandler(err)
     })
+  },
+  getCurrentUserDetails (){
+    $.get('/users/me')
+    .success(user =>{
+      UserDispatcher.dispatch({
+        actionType: Actions.USER.ME,
+        user
+      })
+    })
   }
 }

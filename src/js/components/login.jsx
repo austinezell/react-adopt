@@ -3,7 +3,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import UserActions from '../actions/userActions.js';
 
-export default React.createClass({
+const Login = React.createClass({
   login (event) {
     event.preventDefault()
     let user = {
@@ -31,7 +31,10 @@ export default React.createClass({
         <div>
           No account? Register <Link to='register'>here</Link>
         </div>
+        <Link to="me">Development purpose</Link>
       </div>
     )
   }
 })
+
+export default Login

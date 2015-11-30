@@ -17,7 +17,7 @@ render((
     <Route path='/' component={App}>
       <Route path='login' component={Login}/>
       <Route path='register' component={Register}/>
-
+      <Route path='me' component={Profile}/>
     </Route>
   </Router>
 ), document.getElementById('react-node'));

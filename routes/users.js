@@ -41,12 +41,17 @@ router.post('/login', (req, res)=>{
 
 });
 
-router.get('/me', (req, res) =>{
+router.get('/me', jwtAuth.middleware, (req, res) =>{
   const userId = jwtAuth.getUserId(req.cookies.jwtuser);
-
   User.findById(userId, (err, user)=>{
     err ? res.status(499).send(err) : res.send(user);
   })
-})
+});
+
+router.get('/one/:username', (req, res) =>{
+  User.findOne(req.params.username, (err, user)=>{
+    err ? res.status(499).send(err) : res.send(user);
+  });
+});
 
 module.exports = router;

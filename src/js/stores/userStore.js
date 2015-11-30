@@ -4,7 +4,12 @@ import {EventEmitter} from 'events';
 
 const CHANGE = "CHANGE"
 
+let user;
+
 class UserEmitter extends EventEmitter {
+  returnUserInfo () {
+    return user
+  }
   emitChange () {
     this.emit(CHANGE);
   }
@@ -21,10 +26,14 @@ class UserEmitter extends EventEmitter {
 const UserStore = new UserEmitter();
 
 UserDispatcher.register(action => {
-  console.log(typeof action.actionType, action.actionType);
   switch (action.actionType) {
-  case "LOGIN" :
+    case "LOGIN":
+
+    break;
     
+    case "ME":
+    user = action.user;
+    UserStore.emitChange();
     break;
   }
 })

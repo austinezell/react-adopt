@@ -11,6 +11,7 @@ const App = React.createClass({
     this.setState({})
   },
   componentDidMount(){
+    UserStore.addChangeListener(this.onChange)
   },
   render () {
     return (
