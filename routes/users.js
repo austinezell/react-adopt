@@ -43,7 +43,7 @@ router.post('/login', (req, res)=>{
 
 router.get('/me', jwtAuth.middleware, (req, res) =>{
   const userId = jwtAuth.getUserId(req.cookies.jwtuser);
-  User.findById(userId, (err, user)=>{
+  User.findById(userId).populate('pets').exec( (err, user)=>{
     err ? res.status(499).send(err) : res.send(user);
   })
 });

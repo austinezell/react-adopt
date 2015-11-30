@@ -1,12 +1,13 @@
 'use sctrict'
 
-let Mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
 
-let petSchema = new Mongoose.Schema({
+const petSchema = new Mongoose.Schema({
   name: {type: String, required: true},
+  kind: {type: String, required: true},
   age: {type: Number},
-  descriptions: [{type: String}]
-})
+  description: {type: String, required: true}
+});
 
 module.exports = Mongoose.model('Pet', petSchema)

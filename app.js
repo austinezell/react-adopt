@@ -31,7 +31,7 @@ app.use(passport.initialize());
 
 app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
-
+app.use('/pets', require('./routes/pets'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

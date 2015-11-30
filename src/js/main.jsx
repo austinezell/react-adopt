@@ -18,6 +18,8 @@ render((
       <Route path='login' component={Login}/>
       <Route path='register' component={Register}/>
       <Route path='me' component={Profile}/>
+        <Route path='pets' component={Pets}/>
+
     </Route>
   </Router>
 ), document.getElementById('react-node'));
