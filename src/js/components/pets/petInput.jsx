@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import PetActions from '../actions/petActions.js'
+import PetActions from '../../actions/petActions.js'
 
 const Pets = React.createClass({
   addPet (event) {
@@ -16,6 +16,8 @@ const Pets = React.createClass({
   render () {
     return (
       <div>
+
+        <div className='col-md-3'>
         <form onSubmit={this.addPet} id='login'>
           <div className='form-group'>
             <label htmlFor='name'>Name</label><br/>
@@ -37,6 +39,7 @@ const Pets = React.createClass({
             <button type='submit' className='btn-primary'>Add Pet</button>
           </div>
         </form>
+        </div>
 
       </div>
     )

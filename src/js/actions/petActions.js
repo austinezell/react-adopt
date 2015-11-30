@@ -6,21 +6,24 @@ import Actions from './actionTypes';
 
 const PetActions = {
   addPet (pet) {
-    console.log(pet);
     $.post('/pets/create', pet)
     .success( data => {
-      console.log(data);
       // PetDispatcher({
       //   actionType: Actions.PETS.ADD_PET,
       //   pet: data
       // });
     })
     .error( err => {
-      console.log(err);
     })
   },
   adoptPet () {
 
+  },
+  getAll () {
+    $.get('/pets/getAll')
+    .success(data => {
+      console.log(data);
+    })
   }
 }
 

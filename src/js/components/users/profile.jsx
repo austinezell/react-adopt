@@ -1,9 +1,8 @@
 'use strict';
 
 import React from 'react';
-import UserActions from '../actions/userActions';
-import UserStore from '../stores/userStore';
-import Pets from './pets.jsx';
+import UserActions from '../../actions/userActions';
+import UserStore from '../../stores/userStore';
 
 const Profile = React.createClass({
   getInitialState (){

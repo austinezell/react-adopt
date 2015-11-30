@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import {Link} from 'react-router';
-import UserActions from '../actions/userActions.js';
+import UserActions from '../../actions/userActions.js';
 import { createHistory, useBasename } from 'history';
 
 const Register = React.createClass({
